@@ -73,12 +73,12 @@ void main() {
 
             if (isSun) {
                 color.rgb = vec3(pow(dot(color.rgb, color.rgb) * 0.45, 6.0 - 5.0 * rainFactor));
-                color.rgb *= mix(vec3(1.1, 0.55, 0.0), vec3(0.35), rainFactor * 0.75) * 4.5;
+                color.rgb *= mix(vec3(1.15, 0.62, 0.12), vec3(0.35), rainFactor * 0.75) * 4.8; // fuller, more golden disc
                 color.rgb *= 0.25 + 0.75 * sunVisibility2 + 0.5 * noonFactor;
             }
 
             if (isMoon) {
-                color.rgb *= smoothstep1(min1(length(color.rgb))) * 1.3;
+                color.rgb *= smoothstep1(min1(length(color.rgb))) * vec3(0.85, 0.95, 1.15) * 1.5; // brighter, cooler moon
             }
 
             color.rgb *= GetHorizonFactor(VdotU);

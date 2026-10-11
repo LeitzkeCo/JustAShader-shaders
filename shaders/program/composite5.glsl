@@ -110,9 +110,46 @@ void DoJustGrade(inout vec3 color) {
     vec3 toneTint = mix(vec3(0.985, 0.985, 1.03), vec3(1.05, 1.0, 0.92), smoothstep(0.0, 0.7, lum));
     color *= mix(vec3(1.0), toneTint, JUST_WARMTH);
 
+    // Deepen colors where they read best and leave near-black and near-white alone
+    lum = GetLuminance(color);
+    float midtone = 4.0 * lum * (1.0 - lum);
+    color = mix(vec3(lum), color, 1.0 + 0.22 * JUST_RICHNESS * midtone);
+
     float greenness = clamp((color.g - max(color.r, color.b)) * 4.0, 0.0, 1.0);
-    color = mix(vec3(lum), color, 1.0 + 0.18 * greenness);
+    color = mix(vec3(lum), color, 1.0 + 0.18 * JUST_RICHNESS * greenness);
     color.r += 0.03 * greenness * color.g;
+
+    #ifdef OVERWORLD
+        lum = GetLuminance(color);
+
+        #ifdef BIOME_MOOD
+            // Each climate gets its own mood, only while the player is out in the open
+            float openAir = eyeBrightnessM;
+            vec3 aridLook  = mix(vec3(lum), color, 0.82) * vec3(1.06, 1.0, 0.90); // sun-bleached and dusty
+            vec3 swampLook = mix(vec3(lum), color, 0.88) * vec3(0.93, 1.03, 0.92); // murky green
+            color = mix(color, aridLook, inArid * openAir);
+            color = mix(color, swampLook, inSwamp * openAir);
+            color *= mix(vec3(1.0), vec3(0.95, 0.99, 1.06), inSnowy * openAir); // crisp cold air
+        #endif
+
+        // Underground: cool, slightly drained shadows so torch light stands out as the warm thing
+        float underground = (1.0 - eyeBrightnessM) * 0.7;
+        vec3 caveTint = mix(vec3(0.94, 0.99, 1.06), vec3(1.04, 1.0, 0.95), smoothstep(0.15, 0.6, lum));
+        color = mix(color, mix(vec3(lum), color, 0.85) * caveTint, underground);
+    #endif
+
+    #if JUST_MOOD == 1
+        // Expedition: sun-bleached colors and harder contrast
+        lum = GetLuminance(color);
+        color = mix(vec3(lum), color, 0.86) * vec3(1.03, 1.0, 0.94);
+        color = (color - 0.5) * 1.10 + 0.5;
+    #elif JUST_MOOD == 2
+        // Campfire Night: deeper blue shadows against warmer lights
+        lum = GetLuminance(color);
+        color *= mix(vec3(1.0), vec3(0.86, 0.92, 1.10), 1.0 - smoothstep(0.0, 0.45, lum));
+        color *= mix(vec3(1.0), vec3(1.06, 1.0, 0.90), smoothstep(0.4, 0.9, lum));
+        color *= 0.96;
+    #endif
 
     color = clamp01(color);
 }

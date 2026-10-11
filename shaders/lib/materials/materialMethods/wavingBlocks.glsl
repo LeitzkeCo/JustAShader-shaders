@@ -32,13 +32,34 @@ vec3 GetWave(in vec3 pos, float waveSpeed) {
     return wave * wavingIntensity;
 }
 
+// Just a Shader: gusts of wind that sweep across the land as moving fronts,
+// so a whole field bends together instead of every plant swaying on its own.
+// Returns 0 in calm air and up to 1 while a gust passes over this spot
+float GetWindGust(vec3 worldPos) {
+    float gustTime = frameTimeCounter * WAVING_SPEED;
+    float front = sin(worldPos.x * 0.11  + worldPos.z * 0.07  - gustTime * 1.3)
+                + sin(worldPos.x * 0.043 - worldPos.z * 0.061 - gustTime * 0.71);
+    float gust = pow2(max(front * 0.5, 0.0));
+    return gust * (1.0 + rainFactor) * WIND_GUST_I;
+}
+
 void DoWave_Foliage(inout vec3 playerPos, vec3 worldPos, float waveMult) {
+    #ifdef WIND_GUSTS
+        float gust = GetWindGust(worldPos);
+    #else
+        float gust = 0.0;
+    #endif
+
     worldPos.y *= 0.5;
 
     vec3 wave = GetWave(worldPos, 170.0);
     wave.x = wave.x * 3.0;
     wave.y = 0.0;
     wave.z = wave.z * 8.0 + wave.y * 4.0;
+
+    // Sway harder inside a gust and lean downwind while it passes
+    wave *= 1.0 + 1.5 * gust;
+    wave.xz += vec2(1.0, 0.6) * gust;
 
     #ifdef NO_WAVING_INDOORS
         wave *= clamp(lmCoord.y - 0.87, 0.0, 0.1);
@@ -54,6 +75,10 @@ void DoWave_Leaves(inout vec3 playerPos, vec3 worldPos, float waveMult) {
 
     vec3 wave = GetWave(worldPos, 170.0);
     wave *= vec3(4.0, 3.0, 8.0);
+
+    #ifdef WIND_GUSTS
+        wave *= 1.0 + GetWindGust(worldPos / vec3(0.75, 0.375, 0.75));
+    #endif
 
     wave *= 1.0 - inSnowy; // Leaves with snow on top look wrong
 

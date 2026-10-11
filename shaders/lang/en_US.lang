@@ -1,17 +1,20 @@
 #shaders/lang/en_us.lang
 
 #Profiles
-profile.POTATO=§aPotato
-profile.VERYLOW=§aVery Low
-profile.LOW=§aLow
-profile.MEDIUM=§aMedium
-profile.HIGH=§eHigh (Default)
-profile.VERYHIGH=§eVery High
-profile.ULTRA=§cUltra
-profile.COMPLEMENTARY=§4§lComplementary
+profile.Seed=§a1 - Seed
+profile.Sprout=§a2 - Sprout
+profile.Seedling=§a3 - Seedling
+profile.Garden=§a4 - Garden
+profile.Field=§e5 - Field (Default)
+profile.Orchard=§e6 - Orchard
+profile.Harvest=§c7 - Harvest
+profile.Bounty=§4§l8 - Bounty
 profile.comment=Shader profiles change performance settings with the most optimised visual fidelity to performance ratio. §e[*]§r It's recommended to use one of these profiles for your settings unless you know what you are doing. §e[*]§r All affected settings can all be found in the "Performance Settings" menu.
 
 #Information
+screen.JUST_SETTINGS=§6Just a Shader
+screen.JUST_SETTINGS.comment=The settings that define the Just a Shader look: color mood, clouds, morning mist, block outlines and lens effects.
+
 screen.INFORMATION=Information
 screen.INFORMATION.comment=This section contains buttons that only exist to provide information.
 
@@ -452,6 +455,91 @@ option.TM_CONTRAST.comment=Adjusts the darkness of dark colors and brightness of
 
 option.T_SATURATION=Saturation
 option.T_SATURATION.comment=Adjusts overall colorfulness of the image.
+
+option.JUST_MOOD=Mood
+option.JUST_MOOD.comment=Picks the overall color mood. §eFarm Morning§r: the warm, cozy default. §eExpedition§r: sun-bleached colors and harder contrast. §eCampfire Night§r: deeper blue shadows against warmer lights.
+value.JUST_MOOD.0=1 - Farm Morning
+value.JUST_MOOD.1=2 - Expedition
+value.JUST_MOOD.2=3 - Campfire Night
+
+option.BIOME_MOOD=Biome Mood
+option.BIOME_MOOD.comment=Gives each climate its own atmosphere: dusty heat and shimmering horizons in deserts and badlands, murky green haze in swamps, crisp cold air in snowy biomes.
+
+option.WET_GROUND=Wet Ground
+option.WET_GROUND.comment=Surfaces exposed to the sky get darker and richer in color while it rains.
+
+option.WIND_GUSTS=Wind Gusts
+option.WIND_GUSTS.comment=Gusts of wind sweep across fields as moving fronts, bending grass, flowers and crops together. Stronger during rain.
+
+option.WIND_GUST_I=Wind Gust Strength
+option.WIND_GUST_I.comment=Adjusts how hard the wind gusts push the plants.
+
+option.TILT_SHIFT=Diorama Mode
+option.TILT_SHIFT.comment=Blurs the top and bottom of the screen so the world looks like a miniature model. §c[-]§r Meant for screenshots and relaxed play, it hides detail at the screen edges.
+
+option.TILT_SHIFT_I=Diorama Blur
+option.TILT_SHIFT_I.comment=Adjusts how strong the Diorama Mode blur is.
+
+screen.DISTANCE_SETTINGS=Distance and Distant Horizons
+screen.DISTANCE_SETTINGS.comment=How far away land looks. These settings matter most with Distant Horizons or Voxy, where the view reaches much farther than vanilla.
+
+option.DISTANT_TINT=Distant Silhouettes
+option.DISTANT_TINT.comment=Beyond the usual view range, land turns into dark blue silhouettes instead of fading to white, like distant hills in a landscape painting.
+
+option.DISTANT_BLUE=Silhouette Strength
+option.DISTANT_BLUE.comment=Adjusts how strongly far away land turns into silhouettes.
+
+option.DISTANT_DARK=Silhouette Darkness
+option.DISTANT_DARK.comment=Adjusts how dark the distant silhouettes are.
+
+option.DISTANT_TINT_DISTANCE=Silhouette Range
+option.DISTANT_TINT_DISTANCE.comment=The distance in blocks at which the distant tint is about two thirds of its full strength. Lower values bring the effect closer.
+
+option.CLOUD_SIZE=Cloud Size
+option.CLOUD_SIZE.comment=Adjusts how wide the clouds are. Bigger clouds also sit farther apart.
+
+option.METEORS=Meteors
+option.METEORS.comment=On clear nights a meteor with a glowing tail crosses the sky every 20 to 30 seconds. Most are blue-green or golden, a few are violet, crimson or emerald, and about once every three nights a very bright pink one leaves a trail that keeps glowing for several seconds. In the End there is also a meteor shower every three minutes.
+
+option.METEOR_I=Meteor Brightness
+option.METEOR_I.comment=Adjusts how bright the meteors are.
+
+option.END_STORM=End Storm
+option.END_STORM.comment=A storm without clouds: lightning keeps going off far away in the void around the End, lighting up patches of the sky for an instant, and some strikes show a jagged bolt. §c[-]§r Frequent flashing lights. Lower End Storm Intensity or turn this off if flashes bother you.
+
+option.END_STORM_I=End Storm Intensity
+option.END_STORM_I.comment=Adjusts how bright the lightning of the End storm is.
+
+option.END_COLOR_CYCLE=End Color Cycle
+option.END_COLOR_CYCLE.comment=The color of the End drifts very slowly from blue to purple, then to mint, then back to blue. It changes the sky, the light on the islands, the End beams and the lightning. When off, the End stays blue.
+
+option.END_COLOR_CYCLE_TIME=End Color Cycle Length
+option.END_COLOR_CYCLE_TIME.comment=How long one full turn of the End color cycle takes.
+value.END_COLOR_CYCLE_TIME.10=10 minutes
+value.END_COLOR_CYCLE_TIME.20=20 minutes
+value.END_COLOR_CYCLE_TIME.30=30 minutes
+value.END_COLOR_CYCLE_TIME.60=60 minutes
+
+option.END_GALAXY=End Galaxy
+option.END_GALAXY.comment=A wide band of stars, glowing clouds and dark dust crosses the sky of the End, like the Milky Way.
+
+option.END_CONSTELLATIONS=End Constellations
+option.END_CONSTELLATIONS.comment=Four constellations drawn with thin lines in the sky of the End: the Eye of Ender, the Enderman, the Dragon and the End Crystal.
+
+option.JUST_RICHNESS=Color Richness
+option.JUST_RICHNESS.comment=Deepens colors in the midtones and makes foliage greens fuller, without touching very dark or very bright areas.
+
+option.CLOUD_RISE=Cloud Height
+option.CLOUD_RISE.comment=Total height of the tallest clouds, in blocks. Clouds are built from stacked steps of 8 blocks, so every 8 blocks adds one more step.
+
+option.BLOCK_OUTLINE=Block Outline
+option.BLOCK_OUTLINE.comment=Brightens the rows of texture pixels that touch an exposed block edge, like a highlight painted into the texture. Flat surfaces and inner corners stay clean. Only plain solid blocks get it. Fades out with distance.
+
+option.BLOCK_OUTLINE_I=Block Outline Intensity
+option.BLOCK_OUTLINE_I.comment=Adjusts how bright the block outline is.
+
+option.BLOCK_OUTLINE_THICKNESS=Block Outline Thickness
+option.BLOCK_OUTLINE_THICKNESS.comment=How many rows of texture pixels the outline covers on each face, counted on a 16x block texture.
 
 option.JUST_WARMTH=Cozy Warmth
 option.JUST_WARMTH.comment=Strength of the Just a Shader color grade: warm highlights and soft cool shadows.

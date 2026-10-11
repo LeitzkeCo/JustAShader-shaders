@@ -1,7 +1,7 @@
 #ifndef INCLUDE_CLOUD_COORD
     #define INCLUDE_CLOUD_COORD
 
-    const float cloudNarrowness = 0.07;
+    const float cloudNarrowness = 0.07 / float(CLOUD_SIZE); // smaller value = wider clouds
 
     // Thanks to SixthSurge
     vec2 GetRoundedCloudCoord(vec2 pos, float cloudRoundness) { // cloudRoundness is meant to be 0.125 for clouds and 0.35 for cloud shadows

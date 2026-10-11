@@ -6,7 +6,7 @@ void AddSpecialLightDetail(inout vec3 light, vec3 albedo, float emission) {
 	light += pow2(lightM / (albedo + 0.1));
 }
 
-vec3 blocklightCol = vec3(0.1775, 0.104, 0.077) * vec3(XLIGHT_R, XLIGHT_G, XLIGHT_B);
+vec3 blocklightCol = vec3(0.187, 0.102, 0.066) * vec3(XLIGHT_R, XLIGHT_G, XLIGHT_B); // warmer torch light
 
 vec3 fireSpecialLightColorBase = vec3(2.25, 0.83, 0.27) * 3.7;
 #if ACT_FIRE_COLOR_WARMNESS == 100

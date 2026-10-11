@@ -193,6 +193,8 @@ uniform float isEyeInCave;
 uniform float inDry;
 uniform float inRainy;
 uniform float inSnowy;
+uniform float inArid;
+uniform float inSwamp;
 uniform float velocity;
 uniform float starter;
 uniform float frameTimeSmooth;

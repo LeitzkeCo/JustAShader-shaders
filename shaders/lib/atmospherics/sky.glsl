@@ -84,6 +84,12 @@
                 glareColor = mix(glareColor, vec3(GetLuminance(glareColor)), glareDesaturateFactor);
 
                 finalSky += glareColor * glare * shadowTime;
+
+                // Just a Shader: a wide soft halo, golden around the sun and pale blue around the moon
+                float haloVdotS = max(sunVisibility > 0.5 ? VdotS : -VdotS, 0.0);
+                float halo = pow(haloVdotS, 18.0) * (0.10 + 0.10 * invNoonFactor) * (1.0 - rainFactor);
+                halo *= 0.5 + 0.5 * sunVisibility;
+                finalSky += halo * shadowTime * mix(vec3(0.35, 0.45, 0.75), vec3(1.0, 0.72, 0.38), sunVisibility);
             }
         }
 

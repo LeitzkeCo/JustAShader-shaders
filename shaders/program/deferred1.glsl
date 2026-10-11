@@ -184,16 +184,28 @@ float GetLinearDepth(float depth, float far, float near) {
     #include "/lib/atmospherics/nightNebula.glsl"
 #endif
 
+#if defined METEORS && (defined OVERWORLD || defined END)
+    #include "/lib/atmospherics/meteors.glsl"
+#endif
+
 #ifdef VL_CLOUDS_ACTIVE
     #include "/lib/atmospherics/clouds/mainClouds.glsl"
 #endif
 
 #ifdef END
     #include "/lib/atmospherics/enderStars.glsl"
+    #ifdef END_STORM
+        #include "/lib/atmospherics/endStorm.glsl"
+    #endif
+    #include "/lib/atmospherics/endSky.glsl"
 #endif
 
 #ifdef WORLD_OUTLINE
     #include "/lib/misc/worldOutline.glsl"
+#endif
+
+#ifdef BLOCK_OUTLINE
+    #include "/lib/misc/blockOutline.glsl"
 #endif
 
 #ifdef DARK_OUTLINE
@@ -294,6 +306,10 @@ void main() {
             DoWorldOutline(color.rgb, linearZ0, playerPos, fresnel, dither);
         #endif
 
+        #ifdef BLOCK_OUTLINE
+            if (abs(texelFetch(colortex6, texelCoord, 0).a - 0.5) < 0.1) DoBlockOutline(color.rgb, z0, playerPos, lViewPos);
+        #endif
+
         #ifdef DARK_OUTLINE
             DoDarkOutline(color.rgb, z0);
         #endif
@@ -371,6 +387,9 @@ void main() {
                     nightNebula += GetNightNebula(viewPos.xyz, VdotU, VdotS);
                     color.rgb += nightNebula;
                 #endif
+                #ifdef METEORS
+                    color.rgb += GetMeteors(viewPos.xyz, VdotU);
+                #endif
             #endif
             #ifdef NETHER
                 color.rgb = netherColor * (1.0 - maxBlindnessDarkness);
@@ -380,8 +399,7 @@ void main() {
                 #endif
             #endif
             #ifdef END
-                color.rgb = endSkyColor;
-                color.rgb += GetEnderStars(viewPos.xyz, VdotU);
+                color.rgb = GetEndSky(viewPos.xyz, VdotU);
                 color.rgb *= 1.0 - maxBlindnessDarkness;
 
                 #ifdef ATM_COLOR_MULTS

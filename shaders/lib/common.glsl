@@ -64,7 +64,7 @@
     #define WATER_STYLE_DEFINE -1 //[-1 1 2 3]
     #define WATER_CAUSTIC_STYLE_DEFINE -1 //[-1 1 3]
     #define WATER_REFRACTION_INTENSITY 2.0 //[0.0 0.2 0.4 0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0]
-    #define WATER_FOAM_I 100 //[0 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 110 120 130 140 150]
+    #define WATER_FOAM_I 130 //[0 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 110 120 130 140 150]
     #define WATER_ALPHA_MULT 100 //[25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 110 120 130 140 150 160 170 180 190 200 220 240 260 280 300 325 350 375 400 425 450 475 500 550 600 650 700 750 800 850 900]
     #define WATER_FOG_MULT 100 //[25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 110 120 130 140 150 160 170 180 190 200 220 240 260 280 300 325 350 375 400 425 450 475 500 550 600 650 700 750 800 850 900]
     #define WATERCOLOR_MODE 3 //[3 2 0]
@@ -112,6 +112,8 @@
     #define CLOUD_UNBOUND_SIZE_MULT 100 //[25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 110 120 130 140 150 160 170 180 190 200 220 240 260 280 300]
     #define CLOUD_UNBOUND_RAIN_ADD 0.40 //[0.00 0.05 0.06 0.07 0.08 0.09 0.10 0.12 0.14 0.16 0.18 0.22 0.26 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50]
 
+    #define CLOUD_RISE 40.0 //[16.0 24.0 32.0 40.0 48.0 56.0 64.0]
+    #define CLOUD_SIZE 2.0 //[1.0 1.5 2.0 2.5 3.0 4.0]
     //#define DOUBLE_REIM_CLOUDS
     #define CLOUD_ALT2 288 //[-96 -92 -88 -84 -80 -76 -72 -68 -64 -60 -56 -52 -48 -44 -40 -36 -32 -28 -24 -20 -16 -10 -8 -4 0 4 8 12 16 20 22 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120 124 128 132 136 140 144 148 152 156 160 164 168 172 176 180 184 188 192 196 200 204 208 212 216 220 224 228 232 236 240 244 248 252 256 260 264 268 272 276 280 284 288 292 296 300 304 308 312 316 320 324 328 332 336 340 344 348 352 356 360 364 368 372 376 380 384 388 392 396 400 404 408 412 416 420 424 428 432 436 440 444 448 452 456 460 464 468 472 476 480 484 488 492 496 500 510 520 530 540 550 560 570 580 590 600 610 620 630 640 650 660 670 680 690 700 710 720 730 740 750 760 770 780 790 800]
 
@@ -127,6 +129,12 @@
     #define END_BEAM_CENTER_ALT 68 //[-240 -236 -232 -228 -224 -220 -216 -212 -208 -204 -200 -196 -192 -188 -184 -180 -176 -172 -168 -164 -160 -156 -152 -148 -144 -140 -136 -132 -128 -124 -120 -116 -112 -108 -104 -100 -96 -92 -88 -84 -80 -76 -72 -68 -64 -60 -56 -52 -48 -44 -40 -36 -32 -28 -24 -20 -16 -12 -8 -4 0 4 8 12 16 20 22 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120 124 128 132 136 140 144 148 152 156 160 164 168 172 176 180 184 188 192 196 200 204 208 212 216 220 224 228 232 236 240 244 248 252 256 260 264 268 272 276 280 284 288 292 296 300]
     #define END_BEAM_HEIGHT 1.00 //[0.10 0.15 0.20 0.25 0.30 0.40 0.50 0.60 0.70 0.80 0.90 1.00 1.10 1.20 1.30 1.40 1.50 1.60 1.80 2.00]
     #define END_FLASHES
+    #define END_STORM
+    #define END_STORM_I 1.00 //[0.25 0.50 0.75 1.00 1.25 1.50 2.00]
+    #define END_COLOR_CYCLE
+    #define END_COLOR_CYCLE_TIME 20 //[10 20 30 60]
+    #define END_GALAXY
+    #define END_CONSTELLATIONS
 
     #define BORDER_FOG
     #define ATM_FOG_MULT 0.95 //[0.50 0.65 0.80 0.95]
@@ -150,7 +158,7 @@
     #define MOTION_BLUR_EFFECT -1 //[-1 1]
     #define MOTION_BLURRING_STRENGTH 1.00 //[0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
     #define VIGNETTE_R
-    #define CHROMA_ABERRATION 0 //[0 1 2 3 4 5 6 7 8]
+    #define CHROMA_ABERRATION 2 //[0 1 2 3 4 5 6 7 8]
     #define UNDERWATER_DISTORTION
     #define LENSFLARE_MODE 0 //[0 1 2 3 4]
     #define LENSFLARE_I 1.00 //[0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.10 1.20 1.30 1.40 1.50 1.60 1.70 1.80 1.90 2.00 2.20 2.40 2.60 2.80 3.00 3.25 3.50 3.75 4.00 4.25 4.50 4.75 5.00]
@@ -250,6 +258,9 @@
     #define SELECT_OUTLINE_G 0.35 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
     #define SELECT_OUTLINE_B 1.75 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
 
+    #define BLOCK_OUTLINE
+    #define BLOCK_OUTLINE_I 0.45 //[0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.60 0.70 0.80 0.90 1.00]
+    #define BLOCK_OUTLINE_THICKNESS 2 //[1 2 3 4]
     //#define WORLD_OUTLINE
     //#define WORLD_OUTLINE_SCALED
     #define WORLD_OUTLINE_THICKNESS 1 //[1 2 3 4]
@@ -280,11 +291,25 @@
 
     #define TM_EXPOSURE 1.00 //[0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00 2.10 2.20 2.30 2.40 2.50 2.60 2.70 2.80]
     #define TM_CONTRAST 1.05 //[0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
-    #define T_SATURATION 1.05 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
-    #define T_VIBRANCE 1.10 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
+    #define T_SATURATION 1.10 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
+    #define T_VIBRANCE 1.20 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00]
     #define TM_DARK_DESATURATION 0.25 //[0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00]
     #define TM_WHITE_PATH 1.00 //[0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00 1.05 1.10 1.15 1.20 1.25 1.30 1.35 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90]
     #define JUST_WARMTH 1.00 //[0.50 0.60 0.70 0.80 0.90 1.00 1.10 1.20 1.30 1.40 1.50]
+    #define JUST_RICHNESS 1.00 //[0.00 0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00]
+    #define JUST_MOOD 0 //[0 1 2]
+    #define BIOME_MOOD
+    #define WET_GROUND
+    #define WIND_GUSTS
+    #define WIND_GUST_I 1.00 //[0.25 0.50 0.75 1.00 1.25 1.50 2.00]
+    #define DISTANT_TINT
+    #define DISTANT_BLUE 1.00 //[0.00 0.25 0.50 0.75 1.00 1.25 1.50]
+    #define DISTANT_DARK 1.00 //[0.00 0.25 0.50 0.75 1.00 1.25 1.50]
+    #define DISTANT_TINT_DISTANCE 700 //[300 400 500 700 1000 1500 2000]
+    #define METEORS
+    #define METEOR_I 1.00 //[0.50 0.75 1.00 1.25 1.50 2.00]
+    //#define TILT_SHIFT
+    #define TILT_SHIFT_I 1.00 //[0.50 0.75 1.00 1.25 1.50 2.00]
     //#define COLORGRADING
     #define GR_RR 100 //[0 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 108 116 124 132 140 148 156 164 172 180 188 196 200 212 224 236 248 260 272 284 296 300 316 332 348 364 380 396 400 424 448 472 496 500]
     #define GR_RG 0 //[0 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 108 116 124 132 140 148 156 164 172 180 188 196 200 212 224 236 248 260 272 284 296 300 316 332 348 364 380 396 400 424 448 472 496 500]
@@ -704,6 +729,28 @@
     #endif
     #ifdef MORNING_MIST
     #endif
+    #ifdef BLOCK_OUTLINE
+    #endif
+    #ifdef BIOME_MOOD
+    #endif
+    #ifdef WET_GROUND
+    #endif
+    #ifdef WIND_GUSTS
+    #endif
+    #ifdef TILT_SHIFT
+    #endif
+    #ifdef METEORS
+    #endif
+    #ifdef END_STORM
+    #endif
+    #ifdef END_COLOR_CYCLE
+    #endif
+    #ifdef END_GALAXY
+    #endif
+    #ifdef END_CONSTELLATIONS
+    #endif
+    #ifdef DISTANT_TINT
+    #endif
     #ifdef IPBR_PARTICLE_FEATURES
     #endif
     #ifdef COLORED_CANDLE_LIGHT
@@ -777,7 +824,7 @@
 
     #include "/lib/colors/blocklightColors.glsl"
 
-    const vec3 caveFogColorRaw = vec3(0.13, 0.13, 0.15);
+    const vec3 caveFogColorRaw = vec3(0.10, 0.125, 0.16); // cool blue-teal dark instead of plain grey
     #if CAVE_LIGHTING < 100
         vec3 caveFogColorRaw2 = caveFogColorRaw * 0.7;
     #elif CAVE_LIGHTING == 100
@@ -821,7 +868,23 @@
     #endif
     vec3 lavaLightColor = vec3(0.15, 0.06, 0.01);
 
-    const vec3 endSkyColor = vec3(0.095, 0.07, 0.15) * 1.65;
+    // Just a Shader: the color of the End drifts very slowly from blue to purple, then to
+    // mint, then back to blue. frameTimeCounter starts over every hour, and every cycle
+    // length on offer fits a whole number of times into an hour, so the drift never jumps
+    #ifdef END_COLOR_CYCLE
+        float endCycleTurn = fract(frameTimeCounter / (60.0 * float(END_COLOR_CYCLE_TIME))) * 3.0;
+        float endCycleBlend = smoothstep(0.0, 1.0, fract(endCycleTurn));
+        // How much of each color is in the mix right now: x = blue, y = purple, z = mint
+        vec3 endCycle = endCycleTurn < 1.0 ? vec3(1.0 - endCycleBlend, endCycleBlend, 0.0)
+                      : endCycleTurn < 2.0 ? vec3(0.0, 1.0 - endCycleBlend, endCycleBlend)
+                      :                      vec3(endCycleBlend, 0.0, 1.0 - endCycleBlend);
+    #else
+        vec3 endCycle = vec3(1.0, 0.0, 0.0);
+    #endif
+
+    // The near black sky of the End, and a vivid tint for things that glow in it
+    vec3 endSkyColor  = endCycle.x * vec3(0.030, 0.045, 0.085) + endCycle.y * vec3(0.060, 0.030, 0.085) + endCycle.z * vec3(0.020, 0.056, 0.050);
+    vec3 endCycleTint = endCycle.x * vec3(0.45, 0.65, 1.00) + endCycle.y * vec3(0.75, 0.45, 1.00) + endCycle.z * vec3(0.45, 1.00, 0.75);
 
     #if WEATHER_TEX_OPACITY == 100
         const float rainTexOpacity = 0.25;

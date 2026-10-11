@@ -97,16 +97,47 @@ void main() {
             texCoordM += WATER_REFRACTION_INTENSITY * 0.00035 * sin((texCoord.x + texCoord.y) * 25.0 + frameTimeCounter * 3.0);
     #endif
 
+    #if defined BIOME_MOOD && defined OVERWORLD
+        // Heat shimmer over distant ground in deserts and badlands during the day
+        if (inArid > 0.01 && isEyeInWater == 0) {
+            float shimmerDepth = texture2D(depthtex0, texCoord).r;
+            float shimmer = smoothstep(0.9985, 0.9996, shimmerDepth) * float(shimmerDepth < 1.0);
+            shimmer *= inArid * noonFactor * (1.0 - rainFactor);
+            texCoordM.x += 0.0009 * shimmer * sin(texCoord.y * 220.0 + frameTimeCounter * 9.0);
+        }
+    #endif
+
     vec3 color = texture2D(colortex3, texCoordM).rgb;
 
     #if CHROMA_ABERRATION > 0
         vec2 scale = vec2(1.0, viewHeight / viewWidth);
-        vec2 aberration = (texCoordM - 0.5) * (2.0 / vec2(viewWidth, viewHeight)) * scale * CHROMA_ABERRATION;
+        vec2 centerOffset = texCoordM - 0.5;
+        // Keep the middle of the screen clean and let the color fringing build up towards the borders
+        float edgeFactor = 1.6 * smoothstep(0.08, 0.6, dot(centerOffset, centerOffset) * 2.0);
+        vec2 aberration = centerOffset * (2.0 / vec2(viewWidth, viewHeight)) * scale * CHROMA_ABERRATION * edgeFactor;
         color.rb = vec2(texture2D(colortex3, texCoordM + aberration).r, texture2D(colortex3, texCoordM - aberration).b);
     #endif
 
     #if IMAGE_SHARPENING > 0
         SharpenImage(color, texCoordM);
+    #endif
+
+    #ifdef TILT_SHIFT
+        // Diorama: blur the top and bottom of the screen so the world reads like a miniature
+        float tiltBlur = smoothstep(0.18, 0.5, abs(texCoord.y - 0.5)) * TILT_SHIFT_I;
+        if (tiltBlur > 0.001) {
+            vec2 blurStep = tiltBlur * 3.0 / vec2(viewWidth, viewHeight);
+            vec3 blurred = color;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2( 1.0,  0.4)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2(-0.4,  1.0)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2(-1.0, -0.4)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2( 0.4, -1.0)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2( 1.5,  1.5)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2(-1.5,  1.5)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2( 1.5, -1.5)).rgb;
+            blurred += texture2D(colortex3, texCoordM + blurStep * vec2(-1.5, -1.5)).rgb;
+            color = blurred / 9.0;
+        }
     #endif
 
     /*ivec2 boxOffsets[8] = ivec2[8](

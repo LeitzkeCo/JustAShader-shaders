@@ -326,6 +326,12 @@ void main() {
         emission *= fog;
     #endif
 
+    #if defined WET_GROUND && defined OVERWORLD
+        // Rain soaks whatever faces the open sky: darker and a little richer in color
+        float wetGround = wetness * inRainy * max0(lmCoord.y * 8.0 - 7.0) * (0.4 + 0.6 * NdotUmax0);
+        color.rgb = mix(color.rgb, pow(max(color.rgb, vec3(0.0)), vec3(1.25)) * 0.82, wetGround * 0.75);
+    #endif
+
     DoLighting(color, shadowMult, playerPos, viewPos, lViewPos, geoNormal, normalM, dither,
                worldGeoNormal, lmCoordM, noSmoothLighting, noDirectionalShading, noVanillaAO,
                centerShadowBias, subsurfaceMode, smoothnessG, highlightMult, emission);
@@ -370,9 +376,17 @@ void main() {
         if (chunkFade < 1.0) skyLightFactor = 1.0 - chunkFade * 0.5;
     #endif
 
+    // The alpha of this buffer tells the block outline which pixels are plain solid blocks.
+    // Every other program writes 1.0 there, so plants, leaves, mobs and glowing blocks stay out
+    #ifdef BLOCK_OUTLINE
+        float outlineFlag = subsurfaceMode == 0 && emission < 0.5 ? 0.5 : 1.0;
+    #else
+        float outlineFlag = 1.0;
+    #endif
+
     /* DRAWBUFFERS:06 */
     gl_FragData[0] = color;
-    gl_FragData[1] = vec4(smoothnessD, materialMask, skyLightFactor, 1.0);
+    gl_FragData[1] = vec4(smoothnessD, materialMask, skyLightFactor, outlineFlag);
 
     #if BLOCK_REFLECT_QUALITY >= 2 && RP_MODE != 0
         /* DRAWBUFFERS:064 */

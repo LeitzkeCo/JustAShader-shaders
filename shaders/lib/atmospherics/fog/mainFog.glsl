@@ -141,6 +141,12 @@
             float mist = 0.0;
         #endif
 
+        #if defined OVERWORLD && defined BIOME_MOOD
+            // Dust hanging over deserts and badlands, humid haze over swamps
+            float biomeHaze = max(inArid, inSwamp) * invRainFactor;
+            fog = mix(fog, 1.0 - exp(-lViewPos * 0.006), biomeHaze * 0.35);
+        #endif
+
         float altitudeFactorRaw = GetAtmFogAltitudeFactor(playerPos.y + cameraPosition.y);
         float altitudeFactor = altitudeFactorRaw * 0.9 + 0.1;
 
@@ -187,12 +193,29 @@
 
         fog *= altitudeFactor;
 
+        #if defined OVERWORLD && defined DISTANT_TINT
+            // Aerial perspective: beyond the usual view range, land sinks into flat dark blue
+            // silhouettes instead of washing out to white. The pale haze steps aside for them.
+            // Mostly visible with Distant Horizons or Voxy, where the view reaches far enough
+            // Measured along the ground, so flying up or down does not change how the land below looks
+            float distantFactor = 1.0 - exp(-max0(length(playerPos.xz) - 128.0) / float(DISTANT_TINT_DISTANCE));
+            distantFactor *= invRainFactor * clamp(DISTANT_BLUE * 0.85, 0.0, 1.0);
+
+            vec3 silhouetteColor = vec3(0.10, 0.20, 0.42) * (0.25 + 0.75 * sunVisibility2) * (1.3 - 0.3 * DISTANT_DARK);
+            color.rgb = mix(color.rgb, silhouetteColor, distantFactor);
+            fog *= 1.0 - 0.85 * distantFactor;
+        #endif
+
         if (fog > 0.01 + 0.0025 * dither) {
             fog = clamp(fog, 0.0, 1.0);
 
             #ifdef OVERWORLD
                 vec3 fogColorM = GetAtmFogColor(altitudeFactorRaw, VdotS);
                 fogColorM = mix(fogColorM, vec3(GetLuminance(fogColorM)) * vec3(1.08, 1.0, 0.9), mist * 0.3);
+                #ifdef BIOME_MOOD
+                    fogColorM *= mix(vec3(1.0), vec3(1.12, 1.0, 0.80), inArid) * mix(vec3(1.0), vec3(0.88, 1.0, 0.85), inSwamp);
+                #endif
+
             #else
                 vec3 fogColorM = endSkyColor * 1.5;
             #endif
